@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import app.ikeda.tonappi.work1.databinding.ActivityTitleBinding
 
+// Doggy: コードのフォーマット（スペース、改行、インデント）が整っていてめちゃ読みやすい！！
 class TitleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTitleBinding
