@@ -14,6 +14,10 @@ import app.ikeda.tonappi.work1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // Doggy:
+    //  mSoundPool, Sound という変数は onCreate の中でしか使用していないので、 onCreate 内で定義すると良いね！
+    //  変数は、値を追いやすくしたり、値の変更によるバグを減らすように扱うこが大事なので、
+    //  変数の生存期間（スコープ）を短くするように意識しよう！
     private lateinit var mSoundPool: SoundPool
 
     private var Sound = 0
@@ -30,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        // Doggy: 変更されない値を val で定義できているのナイス！
         //音声の読み込み
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -47,6 +52,13 @@ class MainActivity : AppCompatActivity() {
         //前回のデータ(最後の数字)を入れる変数を初期化
         sharedPreferences = getSharedPreferences("com.example.preferencesample.my_preferences",
             Context.MODE_PRIVATE)
+        // Doggy: "COUNT" というキーが複数回出てくるので、
+        //  変数に代入しておいて、定数として扱うとバグを防げそう！
+
+        // Doggy:
+        //  str のように、変数名を省略したり、「何の文字列か」という情報を省くとコードの可読性が下がってしまうので、良くないとされているよ！
+        //  例えば今回は前回の保存されたデータを呼び出しているので、 "savedString", "savedText" のような命名はどうかな？
+        //  命名に関しては、メンバーにもその重要性をぜひ伝えてあげてほしいです！
         //前回のデータ(最後の数字)の呼び出し
         val str = sharedPreferences.getString("COUNT", "NoData")
 
@@ -55,6 +67,8 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivityResult", str.toString())
 
 
+        // Doggy: 使用する直前で変数を宣言してるのナイス！
+        //  まさに「スコープを狭くする」を実践できてます！
         //数字を0に戻す
         var number: Int = 0
         binding.numberTextView.text = number.toString()
@@ -88,6 +102,8 @@ class MainActivity : AppCompatActivity() {
 
         //最後の数字を保存
         val editor = sharedPreferences.edit()
+        // Doggy: めっちゃ細かいけど、インデントが1つ多いね！
+        //  コードを読みやすくするために、スコープが同じ行のインデントは揃えよう！
             editor.putString("COUNT", result).apply()
 
 
